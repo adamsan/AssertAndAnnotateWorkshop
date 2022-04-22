@@ -20,20 +20,20 @@ Ez alapján hozza létre öngában a bean-eket.
 Main kód:
 
 ```java
-	public class Annotations {
+public class Annotations {
 
-		public static void main(String[] args) {
-			ApplicationContext context = new ApplicationContext(new MyConfig());
-			MyObject o = (MyObject) context.getBean(MyObject.class);
-			System.out.println(o.foo());
-			String stringBean = (String) context.getBean(String.class);
-			System.out.println(stringBean);
-		}
+	public static void main(String[] args) {
+		ApplicationContext context = new ApplicationContext(new MyConfig());
+		MyObject o = (MyObject) context.getBean(MyObject.class);
+		System.out.println(o.foo());
+		String stringBean = (String) context.getBean(String.class);
+		System.out.println(stringBean);
 	}
+}
 
-	class MyObject {
-		public String foo() {
-			return "I'm " + this.getClass().getName() + "!";
-		}
+class MyObject {
+	public String foo() {
+		return "I'm " + this.getClass().getName() + "!";
 	}
+}
 ```
