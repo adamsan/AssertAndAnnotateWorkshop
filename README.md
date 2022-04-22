@@ -1,4 +1,4 @@
-# Assert, Annotations Workshop
+# AssertJ, Annotations Workshop
 
 1. Feladat
 
