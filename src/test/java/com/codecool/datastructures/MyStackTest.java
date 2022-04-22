@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.EmptyStackException;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MyStackTest {
 
@@ -19,44 +19,45 @@ class MyStackTest {
     }
 
     @Test
-    void testEmptyHasZeroSize(){
-        assertEquals(0, stack.size());
+    void testEmptyHasZeroSize() {
+        assertThat(stack.size()).isZero();
     }
 
     @Test
-    void testEmpty(){
-        assertTrue(stack.isEmpty());
-    }
-    @Test
-    void testNotEmpty(){
-        assertTrue(stack.isEmpty());
-        stack.push(44);
-        assertFalse(stack.isEmpty());
+    void testEmpty() {
+        assertThat(stack.isEmpty()).isTrue();
     }
 
     @Test
-    void testNotEmptyCanBecomeEmpty(){
-        assertTrue(stack.isEmpty());
+    void testNotEmpty() {
+        assertThat(stack.isEmpty()).isTrue();
         stack.push(44);
-        assertFalse(stack.isEmpty());
+        assertThat(stack.isEmpty()).isFalse();
+    }
+
+    @Test
+    void testNotEmptyCanBecomeEmpty() {
+        assertThat(stack.isEmpty()).isTrue();
+        stack.push(44);
+        assertThat(stack.isEmpty()).isFalse();
         stack.pop();
-        assertTrue(stack.isEmpty());
+        assertThat(stack.isEmpty()).isTrue();
     }
 
     @Test
     void testAddingOneElementIncreasesSize() {
         stack.push(4);
-        assertEquals(1, stack.size());
+        assertThat(stack.size()).isEqualTo(1);
     }
 
     @Test
     void testAddingElementsIncreasesSize() {
         stack.push(4);
-        assertEquals(1, stack.size());
+        assertThat(stack.size()).isEqualTo(1);
         stack.push(6);
-        assertEquals(2, stack.size());
+        assertThat(stack.size()).isEqualTo(2);
         stack.push(33);
-        assertEquals(3, stack.size());
+        assertThat(stack.size()).isEqualTo(3);
     }
 
     @Test
@@ -65,20 +66,20 @@ class MyStackTest {
         stack.push(42);
         stack.push(155);
         stack.pop();
-        assertEquals(2, stack.size());
+        assertThat(stack.size()).isEqualTo(2);
         stack.pop();
-        assertEquals(1, stack.size());
+        assertThat(stack.size()).isEqualTo(1);
     }
 
     @Test
     void testRemoveFromEmptyThrowsException() {
-        assertThrows(EmptyStackException.class, stack::pop);
+        assertThatThrownBy(stack::pop).isExactlyInstanceOf(EmptyStackException.class);
     }
 
     @Test
     void popReturnesLastItem() {
         stack.push(5);
-        assertEquals(5, stack.pop());
+        assertThat(stack.pop()).isEqualTo(5);
     }
 
     @Test
@@ -87,10 +88,10 @@ class MyStackTest {
         stack.push(7);
         stack.push(2);
         stack.push(1);
-        assertEquals(1, stack.pop());
-        assertEquals(2, stack.pop());
-        assertEquals(7, stack.pop());
-        assertEquals(5, stack.pop());
+        assertThat(stack.pop()).isEqualTo(1);
+        assertThat(stack.pop()).isEqualTo(2);
+        assertThat(stack.pop()).isEqualTo(7);
+        assertThat(stack.pop()).isEqualTo(5);
     }
 
     @Test
@@ -98,12 +99,12 @@ class MyStackTest {
         stack.push(5);
         stack.push(7);
         stack.push(2);
-        assertEquals(2, stack.pop());
-        assertEquals(7, stack.pop());
-        assertEquals(5, stack.pop());
+        assertThat(stack.pop()).isEqualTo(2);
+        assertThat(stack.pop()).isEqualTo(7);
+        assertThat(stack.pop()).isEqualTo(5);
 
         stack.push(1);
-        assertEquals(1, stack.pop());
+        assertThat(stack.pop()).isEqualTo(1);
     }
 
     @Test
@@ -111,16 +112,17 @@ class MyStackTest {
         stringStack.push("a");
         stringStack.push("b");
         stringStack.push("c");
-        assertEquals("c", stringStack.pop());
-        assertEquals("b", stringStack.pop());
-        assertEquals("a", stringStack.pop());
+        assertThat(stringStack.pop()).isEqualTo("c");
+        assertThat(stringStack.pop()).isEqualTo("b");
+        assertThat(stringStack.pop()).isEqualTo("a");
 
         stringStack.push("x");
-        assertEquals("x", stringStack.pop());
+        assertThat(stringStack.pop()).isEqualTo("x");
     }
+
     @Test
     void testStackDataToListForEmptyStack() {
-        assertEquals(Collections.emptyList(), stack.toList());
+        assertThat(stack.toList()).isEqualTo(Collections.emptyList());
     }
 
     @Test
@@ -130,6 +132,6 @@ class MyStackTest {
         stack.push(12);
         stack.push(-3);
         stack.pop();
-        assertEquals(List.of(4, 6, 12), stack.toList());
+        assertThat(stack.toList()).containsExactly(4, 6, 12);
     }
 }
