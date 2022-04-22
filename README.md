@@ -13,7 +13,7 @@ Hozzatok létre 2 annotációt
  
 Az `ApplicationContext` osztályotok konstruktorának paramétere várja majd a konfigurációs osztályotokat.
 (Ha nem konfigurációs osztály példányt kap, dobjon kivételt)
-Ez alapján hozza létre öngában a bean-eket.
+Ez alapján hozza létre önmagában a bean-eket.
 
  - Legyen egy `Object getBean(Class clazz)` metódusa, amivel típus alapján lehet elkérni a bean-eket.
 
